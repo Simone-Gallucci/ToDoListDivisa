@@ -1,69 +1,96 @@
- const todoForm = document.getElementById("todo-form");
-    const todoList = document.getElementById("todo-list");
+let eventi = JSON.parse(localStorage.getItem("eventi")) || [];
+let eventoCorrente = null;
 
-    let todos = [];
+document.addEventListener("DOMContentLoaded", aggiornaLista);
 
-    function createTodoItem(todo) {
-      const li = document.createElement("li");
-      li.classList.add("todo-item");
-      if (todo.completed) li.classList.add("completed");
+function aggiungiEvento() {
+    const nome = document.getElementById("nome").value;
+    const data = document.getElementById("data").value;
+    const ora = document.getElementById("ora").value;
+    const descrizione = document.getElementById("descrizione").value;
 
-      const titleSpan = document.createElement("span");
-      titleSpan.classList.add("title");
-      titleSpan.textContent = `${new Date(todo.datetime).toLocaleString('it-IT')} - ${todo.title}`;
-      titleSpan.addEventListener('click', () => {
-        li.classList.toggle('completed');
-        todo.completed = li.classList.contains('completed');
-        saveTodos();
-      });
-
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Elimina';
-      deleteBtn.className = 'delete-btn';
-      deleteBtn.addEventListener('click', () => {
-        todos = todos.filter(t => t !== todo);
-        updateList();
-      });
-
-      li.appendChild(titleSpan);
-      li.appendChild(deleteBtn);
-      return li;
+    if (!nome || !data || !ora || !descrizione) {
+        alert("Compila tutti i campi!");
+        return;
     }
 
-    function addTodo(event) {
-      event.preventDefault();
+    const evento = { id: Date.now(), nome, data, ora, descrizione };
+    eventi.push(evento);
+    aggiornaLista();
+    pulisciForm();
+}
 
-      const title = event.target.elements["title"].value.trim();
-      const datetime = event.target.elements["datetime"].value;
-      const description = event.target.elements["description"].value.trim();
-      const completed = event.target.querySelector('[name=completed]:checked').value === 'true';
+function aggiornaLista() {
+    const lista = document.getElementById("eventi-lista");
+    lista.innerHTML = "";
+    eventi.forEach(evento => {
+        const div = document.createElement("div");
+        div.className = "task";
+        div.innerHTML = `<strong>${evento.nome}</strong> - ${evento.data} ${evento.ora}`;
+        div.onclick = () => apriModale(evento.id);
+        lista.appendChild(div);
+    });
+    salvaSuLocalStorage();
+}
 
-      if (!title) return alert("Inserisci un titolo!");
+function apriModale(id) {
+    eventoCorrente = eventi.find(evento => evento.id === id);
+    if (!eventoCorrente) return;
 
-      const newTodo = { title, datetime, description, completed };
-      todos.push(newTodo);
-      updateList();
-      event.target.reset();
-    }
+    document.getElementById("edit-nome").value = eventoCorrente.nome;
+    document.getElementById("edit-data").value = eventoCorrente.data;
+    document.getElementById("edit-ora").value = eventoCorrente.ora;
+    document.getElementById("edit-descrizione").value = eventoCorrente.descrizione;
 
-    function updateList() {
-      todoList.innerHTML = "";
-      todos.forEach(todo => todoList.appendChild(createTodoItem(todo)));
-      saveTodos();
-    }
+    document.getElementById("modal-bg").style.display = "block";
+    document.getElementById("modal").style.display = "block";
+}
 
-    function saveTodos() {
-      localStorage.setItem("todos", JSON.stringify(todos));
-    }
+function chiudiModale() {
+    document.getElementById("modal-bg").style.display = "none";
+    document.getElementById("modal").style.display = "none";
+}
 
-    function loadTodos() {
-      const storedTodos = JSON.parse(localStorage.getItem("todos"));
-      if (storedTodos) {
-        todos = storedTodos;
-        updateList();
-      }
-    }
+function salvaModifiche() {
+    if (!eventoCorrente) return;
 
-    todoForm.addEventListener('submit', addTodo);
-    window.onload = loadTodos;
-  </script>
+    eventoCorrente.nome = document.getElementById("edit-nome").value;
+    eventoCorrente.data = document.getElementById("edit-data").value;
+    eventoCorrente.ora = document.getElementById("edit-ora").value;
+    eventoCorrente.descrizione = document.getElementById("edit-descrizione").value;
+
+    aggiornaLista();
+    chiudiModale();
+}
+
+function eliminaEvento() {
+    eventi = eventi.filter(evento => evento.id !== eventoCorrente.id);
+    aggiornaLista();
+    chiudiModale();
+}
+
+function pulisciForm() {
+    document.getElementById("nome").value = "";
+    document.getElementById("data").value = "";
+    document.getElementById("ora").value = "";
+    document.getElementById("descrizione").value = "";
+}
+
+function salvaSuLocalStorage() {
+    localStorage.setItem("eventi", JSON.stringify(eventi));
+}
+
+function filtraEventi() {
+    const filtro = document.getElementById("search").value.toLowerCase();
+    const lista = document.getElementById("eventi-lista");
+    lista.innerHTML = "";
+
+    eventi.filter(evento => evento.nome.toLowerCase().includes(filtro))
+        .forEach(evento => {
+            const div = document.createElement("div");
+            div.className = "task";
+            div.innerHTML = `<strong>${evento.nome}</strong> - ${evento.data} ${evento.ora}`;
+            div.onclick = () => apriModale(evento.id);
+            lista.appendChild(div);
+        });
+}
