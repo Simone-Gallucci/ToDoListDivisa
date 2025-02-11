@@ -9,36 +9,54 @@
 <body>
 
     <div class="container">
+        <!-- Sezione Aggiunta Evento -->
         <div class="form-section">
             <h2>Aggiungi Evento</h2>
-            <input type="text" id="nome" placeholder="Nome Evento">
+            
+            <label for="nome">Nome Evento</label>
+            <input type="text" id="nome" placeholder="Inserisci il nome dell'evento">
+
+            <label for="data">Data dell'evento</label>
             <input type="date" id="data">
+
+            <label for="ora">Ora dell'evento</label>
             <input type="time" id="ora">
-            <textarea id="descrizione" placeholder="Descrizione"></textarea>
+
+            <label for="descrizione">Descrizione</label>
+            <textarea id="descrizione" placeholder="Aggiungi una descrizione"></textarea>
+
             <button onclick="aggiungiEvento()">Aggiungi</button>
         </div>
 
+        <!-- Sezione Elenco Eventi -->
         <div class="list-section">
             <h2>Eventi</h2>
-            <input type="text" id="search" placeholder="Cerca evento..." onkeyup="filtraEventi()">
-            <div id="eventi-lista"></div>
+            <input type="text" id="search" placeholder="Cerca evento..." onkeyup="cercaEvento()">
+            <div id="lista-eventi"></div>
         </div>
     </div>
 
-    <!-- Modale per modifica -->
+    <!-- Popup Modifica Evento -->
     <div class="modal-bg" id="modal-bg" onclick="chiudiModale()"></div>
     <div class="modal" id="modal">
         <h2>Modifica Evento</h2>
+        <label for="edit-nome">Nome Evento</label>
         <input type="text" id="edit-nome">
+
+        <label for="edit-data">Data</label>
         <input type="date" id="edit-data">
+
+        <label for="edit-ora">Ora</label>
         <input type="time" id="edit-ora">
+
+        <label for="edit-descrizione">Descrizione</label>
         <textarea id="edit-descrizione"></textarea>
+
         <button onclick="salvaModifiche()">Salva</button>
-        <button class="delete" onclick="eliminaEvento()">Elimina</button>
-        <button class="cancel" onclick="chiudiModale()">Annulla</button>
+        <button onclick="eliminaEvento()">Elimina</button>
+        <button onclick="chiudiModale()">Annulla</button>
     </div>
 
     <script src="java.js"></script>
-
 </body>
 </html>
