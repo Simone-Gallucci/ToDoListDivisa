@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <script src="java.js"></script>
     <link rel="stylesheet" href="stile.css">
 </head>
 <body>
 
     <div class="container">
-        <!-- Form di inserimento -->
         <div class="form-section">
             <h2>Aggiungi Evento</h2>
             <input type="text" id="nome" placeholder="Nome Evento">
@@ -20,7 +18,6 @@
             <button onclick="aggiungiEvento()">Aggiungi</button>
         </div>
 
-        <!-- Lista eventi -->
         <div class="list-section">
             <h2>Eventi</h2>
             <input type="text" id="search" placeholder="Cerca evento..." onkeyup="filtraEventi()">
@@ -28,8 +25,8 @@
         </div>
     </div>
 
-    <!-- Modale per modifica evento -->
-    <div class="modal-bg" id="modal-bg"></div>
+    <!-- Modale per modifica -->
+    <div class="modal-bg" id="modal-bg" onclick="chiudiModale()"></div>
     <div class="modal" id="modal">
         <h2>Modifica Evento</h2>
         <input type="text" id="edit-nome">
@@ -37,11 +34,11 @@
         <input type="time" id="edit-ora">
         <textarea id="edit-descrizione"></textarea>
         <button onclick="salvaModifiche()">Salva</button>
-        <button onclick="eliminaEvento()">Elimina</button>
-        <button onclick="chiudiModale()">Annulla</button>
+        <button class="delete" onclick="eliminaEvento()">Elimina</button>
+        <button class="cancel" onclick="chiudiModale()">Annulla</button>
     </div>
 
-    
+    <script src="java.js"></script>
 
 </body>
 </html>
