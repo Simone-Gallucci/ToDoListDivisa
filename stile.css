@@ -9,31 +9,30 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    height: 100vh; 
+    min-height: 100vh; 
     background-color: #f4f4f4; 
     padding: 10px;
 }
 
 .container { 
     display: flex; 
-    flex-direction: column;
+    flex-wrap: wrap; 
     gap: 20px; 
     background: white; 
     padding: 20px; 
     border-radius: 10px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 800px;
 }
 
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row;
-        max-width: 800px;
-    }
-    .form-section, .list-section {
-        width: 50%;
-    }
+.form-section, .list-section { 
+    width: 100%;
+}
+
+@media (min-width: 768px) { 
+    .container { flex-direction: row; }
+    .form-section, .list-section { width: 50%; }
 }
 
 h2 { 
@@ -58,17 +57,7 @@ button {
     font-weight: bold;
 }
 
-button:hover {
-    opacity: 0.8;
-}
-
-button.delete {
-    background: #dc3545;
-}
-
-button.cancel {
-    background: #6c757d;
-}
+button:hover { opacity: 0.8; }
 
 .task { 
     background: #f8f9fa; 
@@ -79,11 +68,9 @@ button.cancel {
     font-size: 16px;
 }
 
-.task:hover { 
-    background: #e9ecef; 
-}
+.task:hover { background: #e9ecef; }
 
-/* Modal nascosto di default */
+/* Modale */
 .modal, .modal-bg { 
     display: none; 
     position: fixed; 
@@ -98,10 +85,10 @@ button.cancel {
     max-width: 350px;
 }
 
-.modal-bg {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.modal-bg { 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
     background: rgba(0, 0, 0, 0.5);
 }
