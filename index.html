@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Avanzata</title>
+  <link rel="stylesheet" href="stile.css">
+    <script src="java.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <!-- Form per aggiungere nuove attività -->
+    <div class="form-container">
+      <h2>Nuova Attività</h2>
+      <form id="todo-form">
+        <label for="title">Titolo:</label>
+        <input type="text" id="title" required placeholder="Inserisci il titolo...">
+
+        <label for="datetime">Data e Ora:</label>
+        <input type="datetime-local" id="datetime" required>
+
+        <label for="description">Descrizione:</label>
+        <textarea id="description"></textarea>
+
+        <label>Completato:</label>
+        <div class="radio-group">
+          <label><input type="radio" name="completed" value="true"> Sì</label>
+          <label><input type="radio" name="completed" value="false" checked> No</label>
+        </div>
+
+        <button type="submit">Aggiungi Attività</button>
+      </form>
+    </div>
+
+    <!-- Lista attività -->
+    <div class="list-container">
+      <h2>Le Tue Attività</h2>
+      <ul id="todo-list"></ul>
+    </div>
+  </div>
+
+</body>
+</html>
