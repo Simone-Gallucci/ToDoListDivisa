@@ -1,96 +1,101 @@
-let eventi = JSON.parse(localStorage.getItem("eventi")) || [];
-let eventoCorrente = null;
+// Lista eventi salvata in memoria
+let eventi = [];
+let eventoSelezionato = null;
 
-document.addEventListener("DOMContentLoaded", aggiornaLista);
-
+// Funzione per aggiungere un nuovo evento
 function aggiungiEvento() {
-    const nome = document.getElementById("nome").value;
-    const data = document.getElementById("data").value;
-    const ora = document.getElementById("ora").value;
-    const descrizione = document.getElementById("descrizione").value;
+    let nome = document.getElementById("nome").value.trim();
+    let data = document.getElementById("data").value;
+    let ora = document.getElementById("ora").value;
+    let descrizione = document.getElementById("descrizione").value.trim();
 
-    if (!nome || !data || !ora || !descrizione) {
-        alert("Compila tutti i campi!");
+    if (nome === "" || data === "" || ora === "") {
+        alert("Compila tutti i campi obbligatori!");
         return;
     }
 
-    const evento = { id: Date.now(), nome, data, ora, descrizione };
-    eventi.push(evento);
-    aggiornaLista();
-    pulisciForm();
+    let nuovoEvento = {
+        id: Date.now(),
+        nome: nome,
+        data: data,
+        ora: ora,
+        descrizione: descrizione
+    };
+
+    eventi.push(nuovoEvento);
+    aggiornaListaEventi();
+    pulisciCampi();
 }
 
-function aggiornaLista() {
-    const lista = document.getElementById("eventi-lista");
+// Funzione per aggiornare la lista eventi
+function aggiornaListaEventi() {
+    let lista = document.getElementById("lista-eventi");
     lista.innerHTML = "";
+
     eventi.forEach(evento => {
-        const div = document.createElement("div");
-        div.className = "task";
+        let div = document.createElement("div");
+        div.classList.add("task");
         div.innerHTML = `<strong>${evento.nome}</strong> - ${evento.data} ${evento.ora}`;
-        div.onclick = () => apriModale(evento.id);
+        div.onclick = () => apriModale(evento);
         lista.appendChild(div);
     });
-    salvaSuLocalStorage();
 }
 
-function apriModale(id) {
-    eventoCorrente = eventi.find(evento => evento.id === id);
-    if (!eventoCorrente) return;
-
-    document.getElementById("edit-nome").value = eventoCorrente.nome;
-    document.getElementById("edit-data").value = eventoCorrente.data;
-    document.getElementById("edit-ora").value = eventoCorrente.ora;
-    document.getElementById("edit-descrizione").value = eventoCorrente.descrizione;
-
-    document.getElementById("modal-bg").style.display = "block";
-    document.getElementById("modal").style.display = "block";
-}
-
-function chiudiModale() {
-    document.getElementById("modal-bg").style.display = "none";
-    document.getElementById("modal").style.display = "none";
-}
-
-function salvaModifiche() {
-    if (!eventoCorrente) return;
-
-    eventoCorrente.nome = document.getElementById("edit-nome").value;
-    eventoCorrente.data = document.getElementById("edit-data").value;
-    eventoCorrente.ora = document.getElementById("edit-ora").value;
-    eventoCorrente.descrizione = document.getElementById("edit-descrizione").value;
-
-    aggiornaLista();
-    chiudiModale();
-}
-
-function eliminaEvento() {
-    eventi = eventi.filter(evento => evento.id !== eventoCorrente.id);
-    aggiornaLista();
-    chiudiModale();
-}
-
-function pulisciForm() {
+// Funzione per pulire i campi del form
+function pulisciCampi() {
     document.getElementById("nome").value = "";
     document.getElementById("data").value = "";
     document.getElementById("ora").value = "";
     document.getElementById("descrizione").value = "";
 }
 
-function salvaSuLocalStorage() {
-    localStorage.setItem("eventi", JSON.stringify(eventi));
+// Funzione per cercare eventi
+function cercaEvento() {
+    let filtro = document.getElementById("search").value.toLowerCase();
+    let lista = document.getElementById("lista-eventi").children;
+
+    for (let i = 0; i < lista.length; i++) {
+        let testo = lista[i].innerText.toLowerCase();
+        lista[i].style.display = testo.includes(filtro) ? "" : "none";
+    }
 }
 
-function filtraEventi() {
-    const filtro = document.getElementById("search").value.toLowerCase();
-    const lista = document.getElementById("eventi-lista");
-    lista.innerHTML = "";
+// Funzione per aprire la modale di modifica
+function apriModale(evento) {
+    eventoSelezionato = evento;
+    document.getElementById("edit-nome").value = evento.nome;
+    document.getElementById("edit-data").value = evento.data;
+    document.getElementById("edit-ora").value = evento.ora;
+    document.getElementById("edit-descrizione").value = evento.descrizione;
 
-    eventi.filter(evento => evento.nome.toLowerCase().includes(filtro))
-        .forEach(evento => {
-            const div = document.createElement("div");
-            div.className = "task";
-            div.innerHTML = `<strong>${evento.nome}</strong> - ${evento.data} ${evento.ora}`;
-            div.onclick = () => apriModale(evento.id);
-            lista.appendChild(div);
-        });
+    document.getElementById("modal-bg").style.display = "block";
+    document.getElementById("modal").style.display = "block";
+}
+
+// Funzione per chiudere la modale
+function chiudiModale() {
+    document.getElementById("modal-bg").style.display = "none";
+    document.getElementById("modal").style.display = "none";
+}
+
+// Funzione per salvare le modifiche
+function salvaModifiche() {
+    if (!eventoSelezionato) return;
+
+    eventoSelezionato.nome = document.getElementById("edit-nome").value;
+    eventoSelezionato.data = document.getElementById("edit-data").value;
+    eventoSelezionato.ora = document.getElementById("edit-ora").value;
+    eventoSelezionato.descrizione = document.getElementById("edit-descrizione").value;
+
+    aggiornaListaEventi();
+    chiudiModale();
+}
+
+// Funzione per eliminare un evento
+function eliminaEvento() {
+    if (!eventoSelezionato) return;
+
+    eventi = eventi.filter(e => e.id !== eventoSelezionato.id);
+    aggiornaListaEventi();
+    chiudiModale();
 }
