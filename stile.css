@@ -32,15 +32,29 @@ body {
 }
 
 /* Input e textarea */
-input, textarea {
+/* Assicura che gli input rientrino nel box della form */
+input, textarea, select {
   width: 100%;
-  max-width: 100%;
+  max-width: 350px;
   padding: 10px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
+  margin-bottom: 10px;
   font-size: 16px;
+  box-sizing: border-box; /* Evita che escano dalla form */
+}
+
+/* Allinea i radio button con le etichette */
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spazio tra radio button e testo */
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Spazio tra il cerchio del radio e il testo */
 }
 
 /* Radio button */
