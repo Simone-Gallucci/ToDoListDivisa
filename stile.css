@@ -11,19 +11,29 @@ body {
     align-items: center; 
     height: 100vh; 
     background-color: #f4f4f4; 
+    padding: 10px;
 }
 
 .container { 
     display: flex; 
+    flex-direction: column;
     gap: 20px; 
     background: white; 
     padding: 20px; 
     border-radius: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
 }
 
-.form-section, .list-section { 
-    width: 300px; 
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        max-width: 800px;
+    }
+    .form-section, .list-section {
+        width: 50%;
+    }
 }
 
 h2 { 
@@ -33,32 +43,48 @@ h2 {
 
 input, textarea, button { 
     width: 100%; 
-    padding: 10px; 
-    margin-top: 5px; 
+    padding: 12px; 
+    margin-top: 8px; 
     border: 1px solid #ccc; 
     border-radius: 5px; 
+    font-size: 16px;
 }
 
 button { 
     background: #28a745; 
     color: white; 
     cursor: pointer; 
-    margin-top: 10px; 
+    border: none;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button.delete {
+    background: #dc3545;
+}
+
+button.cancel {
+    background: #6c757d;
 }
 
 .task { 
     background: #f8f9fa; 
-    padding: 10px; 
+    padding: 12px; 
     margin-top: 10px; 
     border-radius: 5px; 
     cursor: pointer; 
+    font-size: 16px;
 }
 
 .task:hover { 
     background: #e9ecef; 
 }
 
-.modal { 
+/* Modal nascosto di default */
+.modal, .modal-bg { 
     display: none; 
     position: fixed; 
     top: 50%; 
@@ -68,23 +94,14 @@ button {
     padding: 20px; 
     border-radius: 10px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
-    width: 300px; 
+    width: 90%;
+    max-width: 350px;
 }
 
-.modal button { 
-    margin-top: 10px; 
-}
-
-.modal-bg { 
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(0, 0, 0, 0.3); 
-}
-
-#search { 
-    margin-bottom: 10px; 
+.modal-bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
