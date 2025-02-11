@@ -23,11 +23,15 @@
         <label for="description">Descrizione:</label>
         <textarea id="description"></textarea>
 
-        <label>Completato:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="completed" value="true"> Sì</label>
-          <label><input type="radio" name="completed" value="false" checked> No</label>
-        </div>
+      <label>Completato:</label>
+      <div class="radio-group">
+      <input type="radio" id="completato-yes" name="completed" value="true" checked>
+      <label for="completato-yes">Sì</label>
+      
+      <input type="radio" id="completato-no" name="completed" value="false">
+      <label for="completato-no">No</label>
+</div>
+
 
         <button type="submit">Aggiungi Attività</button>
       </form>
