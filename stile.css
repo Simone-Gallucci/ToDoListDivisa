@@ -3,41 +3,35 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
 }
 
 .container {
   display: flex;
   flex-wrap: wrap;
-  background-color: #fff;
+  background: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
   max-width: 900px;
 }
 
-/* Form e lista affiancate su desktop */
+/* Sezioni della form e della lista */
 .form-container, .list-container {
   flex: 1;
-  padding: 10px;
+  min-width: 300px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.form-container {
-  border-right: 2px solid #ddd;
+.list-container {
+  border-left: 2px solid #ddd;
 }
 
-/* Titoli */
-h1, h2 {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-/* Stili per input e textarea */
+/* Input e textarea */
 input, textarea {
   width: 100%;
   max-width: 100%;
@@ -45,86 +39,37 @@ input, textarea {
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
-textarea {
-  height: 80px;
-  resize: vertical;
-}
-
-/* Stili per radio button */
+/* Radio button */
 .radio-group {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 15px;
 }
 
 .radio-group label {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
-.radio-group input[type="radio"] {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #007bff;
-  border-radius: 50%;
-  display: inline-block;
-  position: relative;
-}
-
-.radio-group input[type="radio"]:checked {
-  background-color: #007bff;
-}
-
-/* Stile pulsante */
+/* Pulsante */
 button {
-  background-color: #007bff;
+  width: 100%;
+  padding: 10px;
+  background-color: #4a7eff;
   color: white;
   border: none;
-  padding: 10px;
   border-radius: 5px;
-  width: 100%;
   cursor: pointer;
+  font-size: 16px;
 }
 
 button:hover {
-  background-color: #0056b3;
-}
-
-/* Stili per la lista attività */
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.todo-item {
-  background: #f1f1f1;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.completed .title {
-  text-decoration: line-through;
-  color: gray;
-}
-
-.delete-btn {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+  background-color: #3a5ed6;
 }
 
 /* Responsività */
@@ -132,14 +77,9 @@ ul {
   .container {
     flex-direction: column;
   }
-
-  .form-container {
-    border-right: none;
-    border-bottom: 2px solid #ddd;
-  }
-
-  .radio-group {
-    flex-direction: column;
-    align-items: flex-start;
+  
+  .list-container {
+    border-left: none;
+    border-top: 2px solid #ddd;
   }
 }
