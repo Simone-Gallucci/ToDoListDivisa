@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="java.js"></script>
-    <link rel="stylesheet" href="stile.css">
-  <title>To-Do List Avanzata</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="container">
-    <!-- Form per aggiungere nuove attività -->
-    <div class="form-container">
-      <h2>Nuova Attività</h2>
-      <form id="todo-form">
-        <label for="title">Titolo:</label>
-        <input type="text" id="title" required placeholder="Inserisci il titolo...">
 
-        <label for="datetime">Data e Ora:</label>
-        <input type="datetime-local" id="datetime" required>
-
-        <label for="description">Descrizione:</label>
-        <textarea id="description"></textarea>
-
-        <label>Completato:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="completed" value="true"> Sì</label>
-          <label><input type="radio" name="completed" value="false" checked> No</label>
+    <div class="container">
+        <!-- Form di inserimento -->
+        <div class="form-section">
+            <h2>Aggiungi Evento</h2>
+            <input type="text" id="nome" placeholder="Nome Evento">
+            <input type="date" id="data">
+            <input type="time" id="ora">
+            <textarea id="descrizione" placeholder="Descrizione"></textarea>
+            <button onclick="aggiungiEvento()">Aggiungi</button>
         </div>
 
-        <button type="submit">Aggiungi Attività</button>
-      </form>
+        <!-- Lista eventi -->
+        <div class="list-section">
+            <h2>Eventi</h2>
+            <input type="text" id="search" placeholder="Cerca evento..." onkeyup="filtraEventi()">
+            <div id="eventi-lista"></div>
+        </div>
     </div>
 
-    <!-- Lista attività -->
-    <div class="list-container">
-      <h2>Le Tue Attività</h2>
-      <ul id="todo-list"></ul>
+    <!-- Modale per modifica evento -->
+    <div class="modal-bg" id="modal-bg"></div>
+    <div class="modal" id="modal">
+        <h2>Modifica Evento</h2>
+        <input type="text" id="edit-nome">
+        <input type="date" id="edit-data">
+        <input type="time" id="edit-ora">
+        <textarea id="edit-descrizione"></textarea>
+        <button onclick="salvaModifiche()">Salva</button>
+        <button onclick="eliminaEvento()">Elimina</button>
+        <button onclick="chiudiModale()">Annulla</button>
     </div>
-  </div>
 
-   
+    <script src="script.js"></script>
+
 </body>
 </html>
