@@ -1,146 +1,90 @@
-  <style>
-    /* Stile generale */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: Arial, sans-serif; 
+}
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 900px;
-    }
+body { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    background-color: #f4f4f4; 
+}
 
-    /* Form e lista affiancate su desktop */
-    .form-container, .list-container {
-      flex: 1;
-      padding: 10px;
-    }
+.container { 
+    display: flex; 
+    gap: 20px; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
 
-    .form-container {
-      border-right: 2px solid #ddd;
-    }
+.form-section, .list-section { 
+    width: 300px; 
+}
 
-    /* Titoli */
-    h1, h2 {
-      text-align: center;
-      margin-bottom: 15px;
-    }
+h2 { 
+    text-align: center; 
+    margin-bottom: 10px; 
+}
 
-    /* Stili per input e textarea */
-    input, textarea {
-      width: 100%;
-      max-width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
+input, textarea, button { 
+    width: 100%; 
+    padding: 10px; 
+    margin-top: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+}
 
-    textarea {
-      height: 80px;
-      resize: vertical;
-    }
+button { 
+    background: #28a745; 
+    color: white; 
+    cursor: pointer; 
+    margin-top: 10px; 
+}
 
-    /* Stili per radio button */
-    .radio-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
+.task { 
+    background: #f8f9fa; 
+    padding: 10px; 
+    margin-top: 10px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
 
-    .radio-group label {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+.task:hover { 
+    background: #e9ecef; 
+}
 
-    .radio-group input[type="radio"] {
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid #007bff;
-      border-radius: 50%;
-      display: inline-block;
-      position: relative;
-    }
+.modal { 
+    display: none; 
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background: white; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    width: 300px; 
+}
 
-    .radio-group input[type="radio"]:checked {
-      background-color: #007bff;
-    }
+.modal button { 
+    margin-top: 10px; 
+}
 
-    /* Stile pulsante */
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      width: 100%;
-      cursor: pointer;
-    }
+.modal-bg { 
+    display: none; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.3); 
+}
 
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    /* Stili per la lista attività */
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .todo-item {
-      background: #f1f1f1;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .completed .title {
-      text-decoration: line-through;
-      color: gray;
-    }
-
-    .delete-btn {
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    /* Responsività */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .form-container {
-        border-right: none;
-        border-bottom: 2px solid #ddd;
-      }
-
-      .radio-group {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
+#search { 
+    margin-bottom: 10px; 
+}
