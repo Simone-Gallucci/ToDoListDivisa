@@ -14,13 +14,10 @@
             <h2>Aggiungi Evento</h2>
             
             <label for="nome">Nome Evento</label>
-            <input type="text" id="nome" placeholder="Inserisci il nome dell'evento">
+            <input type="text" id="nome" placeholder="Inserisci il nome dell'evento" required>
 
-            <label for="data">Data dell'evento</label>
-            <input type="date" id="data">
-
-            <label for="ora">Ora dell'evento</label>
-            <input type="time" id="ora">
+           <label for="datetime">Data e Ora:</label>
+        <input type="datetime-local" id="datetime" required>
 
             <label for="descrizione">Descrizione</label>
             <textarea id="descrizione" placeholder="Aggiungi una descrizione"></textarea>
